@@ -1,4 +1,4 @@
-import {Employee, employees} from "../../../data/employees"
+import { Employee, employees } from "../../../data/employee";
 
 /**
  * Retrieves all employees

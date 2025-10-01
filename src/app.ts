@@ -20,4 +20,10 @@ app.get("/api/v1/health", (req, res) => {
 app.use("/api/v1", employeeRoute);
 app.use("/api/v1", branchRoute);
 
+app.get("/ping", (req, res) => {
+  const now = new Date().toISOString(); 
+  res.json({ message: "pong", at: now });
+});
+
+
 export default app;
