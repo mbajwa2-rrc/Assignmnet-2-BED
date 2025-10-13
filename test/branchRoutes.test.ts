@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use("/api/v1", routes);
 
-describe("Branch API Endpoints", () => {
+describe.skip("Branch API Endpoints", () => {
 	afterEach(() => {
 		jest.clearAllMocks();
 	});

@@ -7,7 +7,7 @@
     "dev": "ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "test": "jest",
+    "test": "jest --config jest.config.ts --coverage --verbose",
     "lint": "eslint . --ext .ts"
   },
   "repository": {
@@ -37,7 +37,7 @@
     "eslint": "^9.36.0",
     "jest": "^30.2.0",
     "supertest": "^7.1.4",
-    "ts-jest": "^29.4.4",
+    "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
