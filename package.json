@@ -23,6 +23,7 @@
   "homepage": "https://github.com/mbajwa2-rrc/Assignmnet-2-BED#readme",
   "dependencies": {
     "express": "^5.1.0",
+    "joi": "^18.0.1",
     "morgan": "^1.10.1"
   },
   "devDependencies": {
