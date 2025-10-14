@@ -1,10 +1,14 @@
-import { initializeApp, cert, ServiceAccount } from "firebase-admin/app";
+import { initializeApp, applicationDefault, cert, ServiceAccount } from "firebase-admin/app";
 import { getFirestore, Firestore } from "firebase-admin/firestore";
-import serviceAccount from "../serviceAccountKey.json" with { type: "json" };
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const serviceAccount = require("./serviceAccountKey.json") as ServiceAccount;
 
 initializeApp({
-  credential: cert(serviceAccount as ServiceAccount),
+  credential: cert(serviceAccount),
 });
 
 const db: Firestore = getFirestore();
 export { db };
+
+
