@@ -1,23 +1,23 @@
-import { db } from "../../../../config/firebaseConfig";
+import { getFirestore } from "firebase-admin/firestore";
 
-export const getDocuments = async (collectionName: string) => {
-  const snapshot = await db.collection(collectionName).get();
-  return snapshot;
+const db = getFirestore();
+
+export const getDocuments = async (collection: string) => {
+  return await db.collection(collection).get();
 };
 
-export const getDocumentById = async (collectionName: string, id: string) => {
-  const doc = await db.collection(collectionName).doc(id).get();
-  return doc.exists ? doc : null;
+export const getDocumentById = async (collection: string, id: string) => {
+  return await db.collection(collection).doc(id).get();
 };
 
-export const createDocument = async (collectionName: string, data: any, id: string) => {
-  await db.collection(collectionName).doc(id).set(data);
+export const createDocument = async (collection: string, data: any, id: string) => {
+  await db.collection(collection).doc(id).set(data);
 };
 
-export const updateDocument = async (collectionName: string, id: string, data: any) => {
-  await db.collection(collectionName).doc(id).update(data);
+export const updateDocument = async (collection: string, id: string, data: any) => {
+  await db.collection(collection).doc(id).update(data);
 };
 
-export const deleteDocument = async (collectionName: string, id: string) => {
-  await db.collection(collectionName).doc(id).delete();
+export const deleteDocument = async (collection: string, id: string) => {
+  await db.collection(collection).doc(id).delete();
 };

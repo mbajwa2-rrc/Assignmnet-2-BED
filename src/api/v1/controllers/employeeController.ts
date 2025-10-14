@@ -43,7 +43,7 @@ export const getAllEmployees = async (req: Request, res: Response): Promise<void
 export const getEmployeeById = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const employee = await employeeService.getEmployeeById(String(id));
+    const employee = await employeeService.getEmployeeById(Number(id));
 
     if (employee) {
       res.status(200).json({
@@ -62,7 +62,7 @@ export const updateEmployee = async (req: Request, res: Response): Promise<void>
   try {
     const { id } = req.params;
     const updatedData = req.body;
-    const updatedEmployee = await employeeService.updateEmployee(String(id), updatedData);
+    const updatedEmployee = await employeeService.updateEmployee(Number(id), updatedData);
 
     if (updatedEmployee) {
       res.status(200).json({
@@ -70,7 +70,7 @@ export const updateEmployee = async (req: Request, res: Response): Promise<void>
         data: updatedEmployee,
       });
     } else {
-      res.status(400).json({ message: "Employee not found." });
+      res.status(404).json({ message: "Employee not found." });
     }
   } catch {
     res.status(500).json({ message: "Failed to update employee." });
@@ -80,12 +80,12 @@ export const updateEmployee = async (req: Request, res: Response): Promise<void>
 export const deleteEmployee = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const deletedEmployee = await employeeService.deleteEmployee(String(id));
+    const deletedEmployee = await employeeService.deleteEmployee(Number(id));
 
     if (deletedEmployee) {
       res.status(200).json({ message: "Employee deleted successfully." });
     } else {
-      res.status(400).json({ message: "Employee not found." });
+      res.status(404).json({ message: "Employee not found." });
     }
   } catch {
     res.status(500).json({ message: "Failed to delete employee." });
@@ -97,18 +97,16 @@ export const getAllEmployeesFromBranch = async (req: Request, res: Response): Pr
     const { branchId } = req.params;
 
     if (!branchId) {
-      res.status(404).json({ message: "Branch not found." });
+      res.status(400).json({ message: "Branch not found." });
       return;
     }
 
-    const employeesFromBranch = await employeeService.getAllEmployeesFromBranch(String(branchId));
+    const employeesFromBranch = await employeeService.getAllEmployeesFromBranch(Number(branchId));
 
-    if (employeesFromBranch) {
-      res.status(200).json({
-        message: "Employees retrieved successfully.",
-        data: employeesFromBranch,
-      });
-    }
+    res.status(200).json({
+      message: "Employees retrieved successfully.",
+      data: employeesFromBranch,
+    });
   } catch {
     res.status(500).json({ message: "Failed to retrieve employees." });
   }
@@ -125,13 +123,12 @@ export const getAllEmployeesFromDepartment = async (req: Request, res: Response)
 
     const employeesFromDepartment = await employeeService.getAllEmployeesFromDepartment(department);
 
-    if (employeesFromDepartment) {
-      res.status(200).json({
-        message: "Employees retrieved successfully.",
-        data: employeesFromDepartment,
-      });
-    }
+    res.status(200).json({
+      message: "Employees retrieved successfully.",
+      data: employeesFromDepartment,
+    });
   } catch {
     res.status(500).json({ message: "Failed to retrieve employees." });
   }
 };
+

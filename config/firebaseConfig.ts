@@ -1,4 +1,4 @@
-import { initializeApp, applicationDefault, cert, ServiceAccount } from "firebase-admin/app";
+import { initializeApp, cert, ServiceAccount } from "firebase-admin/app";
 import { getFirestore, Firestore } from "firebase-admin/firestore";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

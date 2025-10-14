@@ -1,6 +1,5 @@
 import * as serviceModule from '../src/api/v1/services/branchService';
-import * as repositoryModule from '../src/api/v1/repositories/firestoreRepository';
-
+import * as repositoryModule from '../src/api/v1/repositories/firestoreRespository';
 // Mock the repository module
 jest.mock('../src/api/v1/repositories/firestoreRepository');
 
