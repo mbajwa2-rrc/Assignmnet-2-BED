@@ -1,4 +1,4 @@
-import { db } from "../../../config/firebaseConfig";
+import { db } from "../../../../config/firebaseConfig";
 
 export const addDocument = async (collection: string, data: any) => {
   const docRef = await db.collection(collection).add(data);
