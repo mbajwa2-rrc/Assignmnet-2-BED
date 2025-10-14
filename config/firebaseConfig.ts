@@ -1,16 +1,13 @@
 import { initializeApp, cert, ServiceAccount } from "firebase-admin/app";
 import { getFirestore, Firestore } from "firebase-admin/firestore";
+import serviceAccount from "./serviceAccountKey.json" assert { type: "json" };
 
-import * as serviceAccount from "../serviceAccountKey.json";
-
-// Initialize the Firebase app with the service account credentials
-// This step is necessary before you can use any Firebase services
+// Initialize Firebase app using the service account
 initializeApp({
-    credential: cert(serviceAccount as ServiceAccount),
+  credential: cert(serviceAccount as ServiceAccount),
 });
 
-// Get a reference to the Firestore service
-// This creates a Firestore instance that you can use to interact with your database
+// Get a Firestore reference
 const db: Firestore = getFirestore();
 
 export { db };

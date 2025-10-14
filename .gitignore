@@ -3,3 +3,5 @@ dist/
 logs/
 *.logs
 serviceAccountKey.json
+config/serviceAccountKey.json
+
