@@ -2,14 +2,12 @@
   "name": "assignment-2-bed",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server.js",
-  "type": "module",
+  "main": "index.js",
   "scripts": {
-    "dev": "ts-node src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
-    "test": "jest --config jest.config.ts --coverage --verbose",
-    "lint": "eslint . --ext .ts"
+    "start":"ts-node src/server.ts",
+    "test": "jest",
+    "test-watch":"jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -22,12 +20,6 @@
     "url": "https://github.com/mbajwa2-rrc/Assignmnet-2-BED/issues"
   },
   "homepage": "https://github.com/mbajwa2-rrc/Assignmnet-2-BED#readme",
-  "dependencies": {
-    "express": "^5.1.0",
-    "firebase-admin": "^13.5.0",
-    "joi": "^18.0.1",
-    "morgan": "^1.10.1"
-  },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@types/express": "^5.0.3",
@@ -43,6 +35,13 @@
     "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
-  }
+  },
+   "dependencies": {
+    "express": "^5.1.0",
+    "firebase-admin": "^13.5.0",
+    "joi": "^18.0.1",
+    "morgan": "^1.10.1"
+   }
 }
+  
 

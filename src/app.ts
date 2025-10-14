@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import morgan from "morgan";
-import employeeRoute from "../src/api/v1/routes/employeeRoute";
-import branchRoute from "../src/api/v1/routes/branchRoute";
+import employeeRoute from "./api/v1/routes/employeeRoute";
+import branchRoute from "./api/v1/routes/branchRoute";
 
 const app: Express = express();
 
