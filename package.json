@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/server.js",
+  "type": "module",
   "scripts": {
     "dev": "ts-node src/server.ts",
     "build": "tsc",
@@ -44,3 +45,4 @@
     "typescript": "^5.9.3"
   }
 }
+

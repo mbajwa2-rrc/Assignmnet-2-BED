@@ -1,25 +1,23 @@
 import { db } from "../../../../config/firebaseConfig";
 
-export const addDocument = async (collection: string, data: any) => {
-  const docRef = await db.collection(collection).add(data);
-  return docRef.id;
+export const getDocuments = async (collectionName: string) => {
+  const snapshot = await db.collection(collectionName).get();
+  return snapshot;
 };
 
-export const getAllDocuments = async (collection: string) => {
-  const snapshot = await db.collection(collection).get();
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+export const getDocumentById = async (collectionName: string, id: string) => {
+  const doc = await db.collection(collectionName).doc(id).get();
+  return doc.exists ? doc : null;
 };
 
-export const getDocumentById = async (collection: string, id: string) => {
-  const doc = await db.collection(collection).doc(id).get();
-  if (!doc.exists) return null;
-  return { id: doc.id, ...doc.data() };
+export const createDocument = async (collectionName: string, data: any, id: string) => {
+  await db.collection(collectionName).doc(id).set(data);
 };
 
-export const updateDocument = async (collection: string, id: string, data: any) => {
-  await db.collection(collection).doc(id).update(data);
+export const updateDocument = async (collectionName: string, id: string, data: any) => {
+  await db.collection(collectionName).doc(id).update(data);
 };
 
-export const deleteDocument = async (collection: string, id: string) => {
-  await db.collection(collection).doc(id).delete();
+export const deleteDocument = async (collectionName: string, id: string) => {
+  await db.collection(collectionName).doc(id).delete();
 };
