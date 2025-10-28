@@ -1,6 +1,4 @@
-import { getFirestore } from "firebase-admin/firestore";
-
-const db = getFirestore();
+import { db } from "../../../../config/firebaseConfig"
 
 export const getDocuments = async (collection: string) => {
   return await db.collection(collection).get();
