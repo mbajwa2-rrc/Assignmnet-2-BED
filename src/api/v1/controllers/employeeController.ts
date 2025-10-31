@@ -1,0 +1,134 @@
+import { Request, Response } from "express";
+import * as employeeService from "../services/employeeService";
+
+export const createEmployee = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { name, position, department, email, phone, branchId } = req.body;
+
+    if (!name || !position || !department || !email || !phone || branchId == null) {
+      res.status(400).json({ message: "Missing field." });
+      return;
+    }
+
+    const newEmployee = await employeeService.createEmployee({
+      name,
+      position,
+      department,
+      email,
+      phone,
+      branchId,
+    });
+
+    res.status(201).json({
+      message: "Employee created successfully.",
+      data: newEmployee,
+    });
+  } catch {
+    res.status(500).json({ message: "Failed to create employee." });
+  }
+};
+
+export const getAllEmployees = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const employees = await employeeService.getAllEmployees();
+    res.status(200).json({
+      message: "Retrieved all employees successfully.",
+      data: employees,
+    });
+  } catch {
+    res.status(500).json({ message: "Failed to retrieve employees." });
+  }
+};
+
+export const getEmployeeById = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const employee = await employeeService.getEmployeeById(Number(id));
+
+    if (employee) {
+      res.status(200).json({
+        message: "Employee retrieved successfully.",
+        data: employee,
+      });
+    } else {
+      res.status(404).json({ message: "Employee not found." });
+    }
+  } catch {
+    res.status(500).json({ message: "Failed to retrieve employee." });
+  }
+};
+
+export const updateEmployee = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const updatedData = req.body;
+    const updatedEmployee = await employeeService.updateEmployee(Number(id), updatedData);
+
+    if (updatedEmployee) {
+      res.status(200).json({
+        message: "Employee updated successfully.",
+        data: updatedEmployee,
+      });
+    } else {
+      res.status(404).json({ message: "Employee not found." });
+    }
+  } catch {
+    res.status(500).json({ message: "Failed to update employee." });
+  }
+};
+
+export const deleteEmployee = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const deletedEmployee = await employeeService.deleteEmployee(Number(id));
+
+    if (deletedEmployee) {
+      res.status(200).json({ message: "Employee deleted successfully." });
+    } else {
+      res.status(404).json({ message: "Employee not found." });
+    }
+  } catch {
+    res.status(500).json({ message: "Failed to delete employee." });
+  }
+};
+
+export const getAllEmployeesFromBranch = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { branchId } = req.params;
+
+    if (!branchId) {
+      res.status(400).json({ message: "Branch not found." });
+      return;
+    }
+
+    const employeesFromBranch = await employeeService.getAllEmployeesFromBranch(Number(branchId));
+
+    res.status(200).json({
+      message: "Employees retrieved successfully.",
+      data: employeesFromBranch,
+    });
+  } catch {
+    res.status(500).json({ message: "Failed to retrieve employees." });
+  }
+};
+
+export const getAllEmployeesFromDepartment = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { department } = req.params;
+
+    if (!department) {
+      res.status(400).json({ message: "Department not found." });
+      return;
+    }
+
+    const employeesFromDepartment = await employeeService.getAllEmployeesFromDepartment(department);
+
+    res.status(200).json({
+      message: "Employees retrieved successfully.",
+      data: employeesFromDepartment,
+    });
+  } catch {
+    res.status(500).json({ message: "Failed to retrieve employees." });
+  }
+};
+

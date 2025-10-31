@@ -1,0 +1,48 @@
+{
+  "name": "assignment-2-bed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "start": "ts-node src/server.ts",
+    "build": "tsc",
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbajwa2-rrc/Assignmnet-2-BED.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbajwa2-rrc/Assignmnet-2-BED/issues"
+  },
+  "homepage": "https://github.com/mbajwa2-rrc/Assignmnet-2-BED#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.7.2",
+    "@types/supertest": "^6.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint": "^9.36.0",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.7",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "firebase-admin": "^13.5.0",
+    "joi": "^18.0.1",
+    "morgan": "^1.10.1"
+  }
+}
