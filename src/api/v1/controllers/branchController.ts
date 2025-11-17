@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as branchService from "../services/branchService";
+import { successResponse, errorResponse } from "../models/responseModel";
 
 /**
  * Creates a new branch after validation
@@ -11,7 +12,10 @@ export const createBranch = async (req: Request, res: Response
     try{
         const {name, address, phone} = req.body;
         if (!name || !address || !phone){
-            res.status(400).json({ message: "Missing field."});
+            res.status(400).json(errorResponse(
+                null,
+                "Missing field."
+            ));
             return;
         }
         const newBranch = await branchService.createBranch({
@@ -19,13 +23,16 @@ export const createBranch = async (req: Request, res: Response
             address,
             phone
         });
-        res.status(201).json({ 
-            message: "Branch created successfully.", 
-            data: newBranch
-        });
+        res.status(201).json(successResponse(
+            newBranch,
+            "Branch created successfully."
+        ));
     }
     catch (error){
-        res.status(500).json({ message: "Failed to create branch."});
+        res.status(500).json(errorResponse(
+            null,
+            "Failed to create branch."
+        ));
     }
 };
 
@@ -38,13 +45,16 @@ export const getAllBranches = async (req: Request, res: Response
 ): Promise<void> => {
     try{
         const branches = await branchService.getAllBranches();
-        res.status(200).json({
-            message: "Retrieved all branches successfully.",
-            data: branches
-        });
+        res.status(200).json(successResponse(
+            branches,
+            "Retrieved all branches successfully."
+        ));
     }
     catch (error){
-        res.status(500).json({message: "Failed to retrieve branches."});
+        res.status(500).json(errorResponse(
+            null,
+            "Failed to retrieve branches."
+        ));
     }
 };
 
@@ -59,17 +69,23 @@ export const getBranchById = async (req: Request, res: Response
         const {id} = req.params;
         const branch = await branchService.getBranchById(Number(id));
         if (branch){
-            res.status(200).json({
-                message: "Branch retrieved successfully.",
-                data: branch
-            });
+            res.status(200).json(successResponse(
+                branch,
+                "Branch retrieved successfully."
+            ));
         }
         else{
-            res.status(400).json({message: "Branch not found."});
+            res.status(404).json(errorResponse(
+                null,
+                "Branch not found."
+            ));
         }
     }
     catch (error){
-        res.status(500).json({message: "Failed to retrieve branch."});
+        res.status(500).json(errorResponse(
+            null,
+            "Failed to retrieve branch."
+        ));
     }
 };
 
@@ -82,21 +98,35 @@ export const updateBranch = async (req: Request, res: Response
 ): Promise<void> => {
     try{
         const {id} = req.params;
-        const updatedData = req.body;
+        const {name, address, phone} = req.body;
+        if (!name || !address || !phone){
+            res.status(400).json(errorResponse(
+                null,
+                "Missing field."
+            ));
+            return;
+        }
         const updatedBranch = 
-            await branchService.updateBranch(Number(id), updatedData);
+            await branchService.updateBranch(Number(id), 
+            {name, address, phone});
         if (updatedBranch){
-            res.status(200).json({
-                message: "Branch updated successfully.", 
-                data: updatedBranch
-            });
+            res.status(200).json(successResponse(
+                updatedBranch,
+                "Branch updated successfully."
+            ));
         }
         else{
-            res.status(400).json({message: "Branch not found."});
+            res.status(404).json(errorResponse(
+                null,
+                "Branch not found."
+            ));
         }
     }
     catch (error){
-        res.status(500).json({message: "Failed to update branch."});
+        res.status(500).json(errorResponse(
+            null,
+            "Failed to update branch."
+        ));
     }
 };
 
@@ -111,13 +141,22 @@ export const deleteBranch = async (req: Request, res: Response
         const {id} = req.params;
         const deletedBranch = await branchService.deleteBranch(Number(id));
         if (deletedBranch){
-            res.status(200).json({message: "Branch deleted successfully."});
+            res.status(200).json(successResponse(
+                null,
+                "Branch deleted successfully."
+            ));
         }
         else{
-            res.status(400).json({message: "Branch not found"});
+            res.status(404).json(errorResponse(
+                null,
+                "Branch not found"
+            ));
         }
     }
     catch (error){
-        res.status(500).json({message: "Failed to delete branch."});
+        res.status(500).json(errorResponse(
+            null,
+            "Failed to delete branch."
+        ));
     }
 };
