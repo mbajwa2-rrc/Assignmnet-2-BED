@@ -19,3 +19,11 @@ export const updateDocument = async (collection: string, id: string, data: any) 
 export const deleteDocument = async (collection: string, id: string) => {
   await db.collection(collection).doc(id).delete();
 };
+
+export default {
+  getDocuments,
+  getDocumentById,
+  createDocument,
+  updateDocument,
+  deleteDocument,
+};

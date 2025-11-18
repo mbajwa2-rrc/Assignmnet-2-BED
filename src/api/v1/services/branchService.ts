@@ -1,4 +1,4 @@
-import {Branch} from "../../../data/branches";
+import { Branch } from "../models/branchModel";
 import firestoreRepo from "../repositories/firestoreRepository";
 
 const BRANCHES_COLLECTION = "branches";
@@ -10,7 +10,7 @@ const BRANCHES_COLLECTION = "branches";
  */
 export const getAllBranches = async (): Promise<Branch[]> => {
     try{
-        const snapshot = await firestoreRepository.getDocuments(BRANCHES_COLLECTION);
+        const snapshot = await firestoreRepo.getDocuments(BRANCHES_COLLECTION);
         const branches: Branch[] = snapshot.docs.map(doc => ({
             id: Number(doc.id), 
             ...(doc.data() as Omit<Branch, "id">)
@@ -33,7 +33,7 @@ export const getAllBranches = async (): Promise<Branch[]> => {
  */
 export const getBranchById = async (id: number): Promise<Branch | null> => {
     try{
-        const doc = await firestoreRepository.getDocumentById(
+        const doc = await firestoreRepo.getDocumentById(
             BRANCHES_COLLECTION,
             id.toString()
         );
@@ -57,7 +57,7 @@ export const getBranchById = async (id: number): Promise<Branch | null> => {
 export const createBranch = async (branchData: Omit<Branch, "id">): Promise<Branch> => {
     try{
         const id = Date.now();
-        await firestoreRepository.createDocument(
+        await firestoreRepo.createDocument(
             BRANCHES_COLLECTION,
             branchData,
             id.toString()
@@ -82,7 +82,7 @@ export const updateBranch = async (
     branchData: Pick<Branch, "name" | "address" | "phone">
 ): Promise<Branch | null> => {
     try{
-        const doc = await firestoreRepository.getDocumentById(
+        const doc = await firestoreRepo.getDocumentById(
             BRANCHES_COLLECTION,
             id.toString()
         );
@@ -90,7 +90,7 @@ export const updateBranch = async (
             return null
         }
 
-        await firestoreRepository.updateDocument(
+        await firestoreRepo.updateDocument(
             BRANCHES_COLLECTION,
             id.toString(),
             branchData
@@ -111,7 +111,7 @@ export const updateBranch = async (
  */
 export const deleteBranch = async (id: number): Promise<boolean | null> => {
     try{
-        const doc = await firestoreRepository.getDocumentById(
+        const doc = await firestoreRepo.getDocumentById(
             BRANCHES_COLLECTION,
             id.toString()
         );
@@ -119,7 +119,7 @@ export const deleteBranch = async (id: number): Promise<boolean | null> => {
             return null
         }
 
-        await firestoreRepository.deleteDocument(
+        await firestoreRepo.deleteDocument(
             BRANCHES_COLLECTION,
             id.toString(),
         );
