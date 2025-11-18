@@ -1,6 +1,5 @@
-import {Employee} from "../models/employeeModel";
-import * as firestoreRepository from "../repositories/firestoreRepository"
-
+import { Employee } from "../models/employeeModel";
+import firestoreRepo from "../repositories/firestoreRepository";
 
 const EMPLOYEES_COLLECTION = "employees";
 

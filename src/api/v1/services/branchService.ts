@@ -1,6 +1,5 @@
 import {Branch} from "../../../data/branches";
-import * as firestoreRepository from "../repositories/firestoreRepository"
-
+import firestoreRepo from "../repositories/firestoreRepository";
 
 const BRANCHES_COLLECTION = "branches";
 

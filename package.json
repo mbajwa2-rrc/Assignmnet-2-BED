@@ -24,7 +24,9 @@
   "homepage": "https://github.com/mbajwa2-rrc/Assignmnet-2-BED#readme",
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/helmet": "^0.0.48",
     "@types/jest": "^30.0.0",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.7.2",
@@ -40,9 +42,13 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "firebase-admin": "^13.5.0",
+    "helmet": "^8.1.0",
     "joi": "^18.0.1",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
