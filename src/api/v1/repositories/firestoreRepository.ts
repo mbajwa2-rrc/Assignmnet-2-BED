@@ -20,10 +20,20 @@ export const deleteDocument = async (collection: string, id: string) => {
   await db.collection(collection).doc(id).delete();
 };
 
+export const queryDocuments = async (
+  collection: string,
+  field: string,
+  operator: FirebaseFirestore.WhereFilterOp,
+  value: any
+) => {
+  return await db.collection(collection).where(field, operator, value).get();
+};
+
 export default {
   getDocuments,
   getDocumentById,
   createDocument,
   updateDocument,
   deleteDocument,
+  queryDocuments,   
 };
